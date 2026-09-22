@@ -21,7 +21,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/pedidos")
 @RequiredArgsConstructor
-@Tag(name = "Pedidos", description = "Consulta de pedidos con filtros combinables (Ejercicio 5)")
+@Tag(name = "Pedidos", description = "Consulta de pedidos con filtros combinables ")
 public class PedidoController {
 
     private final PedidoService pedidoService;

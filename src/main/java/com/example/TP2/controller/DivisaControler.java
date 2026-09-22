@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/divisas")
 @RequiredArgsConstructor
-@Tag(name = "Divisas", description = "Conversion de divisas usando la API externa Frankfurter (Ejercicio 3)")
+@Tag(name = "Divisas", description = "Conversion de divisas usando la API externa Frankfurter ")
 public class DivisaControler {
 
     private final DivisaService divisaService;

@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 
 @RestController 
 @RequestMapping("/api/ventas")
-@Tag(name = "Ventas", description = "Procesamiento de ventas (Ej 1)")
+@Tag(name = "Ventas", description = "Procesamiento de ventas ")
 public class VentasControler {
     private final VentaService ventaService;
 

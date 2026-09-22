@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/clientes")
 @RequiredArgsConstructor
-@Tag(name = "Clientes", description = "Alta de clientes (Ejercicio 4)")
+@Tag(name = "Clientes", description = "Alta de clientes")
 public class ClienteController {
 
     private final ClienteService clienteService;
