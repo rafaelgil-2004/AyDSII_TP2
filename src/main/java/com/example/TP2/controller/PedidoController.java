@@ -27,7 +27,7 @@ public class PedidoController {
     private final PedidoService pedidoService;
 
     @GetMapping("/buscar")
-    @Operation(summary = "Busca pedidos combinando filtros opcionales (todos con AND)")
+    @Operation(summary = "Busca pedidos combinando filtros opcionales ")
     public ResponseEntity<Map<String, Object>> buscar(
             @Parameter(description = "Id del cliente") @RequestParam(required = false) Integer clienteId,
             @Parameter(description = "Nombre de la categoria") @RequestParam(required = false) String categoria,
