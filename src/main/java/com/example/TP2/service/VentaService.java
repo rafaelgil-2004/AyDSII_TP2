@@ -20,8 +20,7 @@ public class VentaService {
         double totalFacturado = ventas.stream().mapToDouble(Venta::getImporte).sum();
         int cantidadVentas = ventas.size();
         double ticketPromedio = totalFacturado/cantidadVentas;
-        Venta ventaMayor = ventas.stream()
-                .max(Comparator.comparingDouble(Venta::getImporte)).orElseThrow();
+        Venta ventaMayor = ventas.stream().max(Comparator.comparingDouble(Venta::getImporte)).orElseThrow();
 
         Venta ventaMenor = ventas.stream().min(Comparator.comparingDouble(Venta::getImporte)).orElseThrow();
         Map<String, Integer> cantidadPorProducto = ventas.stream().collect(Collectors.groupingBy(Venta::getProducto, Collectors.summingInt(Venta::getCantidad)));
