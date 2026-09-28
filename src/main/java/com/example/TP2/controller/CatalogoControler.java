@@ -55,8 +55,7 @@ public class CatalogoControler {
     @Operation(summary = "Ordena los productos por precio o nombre")
     public ResponseEntity<Map<String, Object>> ordenar(
             @Parameter(description = "Criterio: precio o nombre", example = "precio") @RequestParam String criterio,
-            @Parameter(description = "Orden: asc o desc", example = "desc")
-            @RequestParam(required = false, defaultValue = "asc") String orden) {
+            @Parameter(description = "Orden: asc o desc", example = "desc") @RequestParam(required = false, defaultValue = "asc") String orden) {
 
         List<Producto> productos = catalogoService.ordenar(criterio, orden);
         return respuestaOk("Productos ordenados con exito", productos);

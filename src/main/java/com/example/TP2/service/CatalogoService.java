@@ -46,7 +46,6 @@ public class CatalogoService {
     }
 
     public Producto agregar(Producto producto) {
-        // El id lo asigna siempre el Almacen (ver Almacen.guardar), nunca el cliente.
         return almacen.guardar(producto);
     }
 
