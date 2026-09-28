@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/api/catalogo")
 @RequiredArgsConstructor
 @Tag(name = "Catalogo", description = "Gestion de productos")
-public class CatalogControler {
+public class CatalogoControler {
     private final CatalogoService catalogoService;
 
     @GetMapping
