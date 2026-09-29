@@ -21,7 +21,7 @@ public class ClienteService {
 
     
     public Cliente altaValidada(ClienteDTO dto) {
-        if (clienteRepository.existsByEmail(dto.getEmail()) > 0) {
+        if (clienteRepository.emaiExistente(dto.getEmail()) > 0) {
             throw new DatosInvalidosException("El email ya esta registrado");
         }
         return clienteRepository.save(mapearAEntidad(dto));

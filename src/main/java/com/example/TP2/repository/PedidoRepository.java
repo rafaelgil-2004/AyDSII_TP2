@@ -11,10 +11,11 @@ import java.util.List;
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 
     @Query("SELECT DISTINCT p FROM Pedido p " +
+           "LEFT JOIN p.cliente c " +
            "LEFT JOIN p.detalles d " +
            "LEFT JOIN d.producto pr " +
            "LEFT JOIN pr.categoria cat " +
-           "WHERE (:clienteId IS NULL OR p.cliente.id = :clienteId) " +
+           "WHERE (:clienteId IS NULL OR c.id = :clienteId) " +
            "AND (:categoria IS NULL OR cat.nombre = :categoria) " +
            "AND (:fechaDesde IS NULL OR p.fechaPedido >= :fechaDesde) " +
            "AND (:fechaHasta IS NULL OR p.fechaPedido <= :fechaHasta) " +

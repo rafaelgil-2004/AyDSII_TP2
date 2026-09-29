@@ -9,5 +9,5 @@ import org.springframework.data.repository.query.Param;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Query("SELECT COUNT(c) FROM Cliente c WHERE c.email = :email")
-    Integer existsByEmail(@Param("email") String email);
+    Integer emaiExistente(@Param("email") String email);
 }

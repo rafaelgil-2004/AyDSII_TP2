@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity//mapear como persistente
 //tabla que representa
-@Table(name = "clientes")//sin esto va a tomar que la tabla es CLiente no clientes como esta en la BD
+@Table(name = "clientes")//sin esto va a tomar que la tabla es Cliente no clientes como esta en la BD
 @Data
 @NoArgsConstructor
 public class Cliente {
