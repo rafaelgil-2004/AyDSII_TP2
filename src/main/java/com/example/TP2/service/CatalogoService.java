@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.TP2.Almacen;
 import com.example.TP2.exception.DatosInvalidosException;
 import com.example.TP2.exception.RecursoNoEncontradoException;
-import com.example.TP2.models.Producto;
+import com.example.TP2.models.ProductoDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,11 +17,11 @@ import lombok.RequiredArgsConstructor;
 public class CatalogoService {
     private final Almacen almacen;
 
-    public List<Producto> obtenerTodos(){
+    public List<ProductoDTO> obtenerTodos(){
         return almacen.obtenerTodos();
     }
 
-    public List<Producto> buscar(String categoria, Double precioMin, Double precioMax) {
+    public List<ProductoDTO> buscar(String categoria, Double precioMin, Double precioMax) {
         return almacen.obtenerTodos().stream()
                 .filter(p -> categoria == null || p.getCategoria().equalsIgnoreCase(categoria))
                 .filter(p -> precioMin == null || p.getPrecio() >= precioMin)
@@ -29,10 +29,10 @@ public class CatalogoService {
                 .toList();
     }
 
-    public List<Producto> ordenar(String criterio, String orden) {
-        Comparator<Producto> comparator = switch (criterio) {
-            case "precio" -> Comparator.comparingDouble(Producto::getPrecio);
-            case "nombre" -> Comparator.comparing(Producto::getNombre, String.CASE_INSENSITIVE_ORDER);
+    public List<ProductoDTO> ordenar(String criterio, String orden) {
+        Comparator<ProductoDTO> comparator = switch (criterio) {
+            case "precio" -> Comparator.comparingDouble(ProductoDTO::getPrecio);
+            case "nombre" -> Comparator.comparing(ProductoDTO::getNombre, String.CASE_INSENSITIVE_ORDER);
             default -> throw new DatosInvalidosException("El criterio debe ser 'precio' o 'nombre'");
         };
 
@@ -45,12 +45,12 @@ public class CatalogoService {
         return almacen.obtenerTodos().stream().sorted(comparator).toList();
     }
 
-    public Producto agregar(Producto producto) {
+    public ProductoDTO agregar(ProductoDTO producto) {
         return almacen.guardar(producto);
     }
 
-    public Producto modificarStock(Long id, int cantidad) {
-        Producto producto = buscarPorId(id);
+    public ProductoDTO modificarStock(Long id, int cantidad) {
+        ProductoDTO producto = buscarPorId(id);
         int nuevoStock = producto.getStock() + cantidad;
         if (nuevoStock < 0) {
             throw new DatosInvalidosException("El stock no puede quedar por debajo de 0");
@@ -64,8 +64,8 @@ public class CatalogoService {
         almacen.eliminar(id);
     }
 
-    private Producto buscarPorId(Long id) {
-        Producto producto = almacen.buscarPorId(id);
+    private ProductoDTO buscarPorId(Long id) {
+        ProductoDTO producto = almacen.buscarPorId(id);
         if (producto == null) {
             throw new RecursoNoEncontradoException("No existe un producto con id " + id);
         }

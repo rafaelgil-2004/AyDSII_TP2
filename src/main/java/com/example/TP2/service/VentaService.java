@@ -9,21 +9,21 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.example.TP2.exception.DatosInvalidosException;
-import com.example.TP2.models.Venta;
+import com.example.TP2.models.VentaDTO;
 
 
 @Service 
 public class VentaService {
-    public Map<String, Object> calcularEstadisticas(List<Venta> ventas){
+    public Map<String, Object> calcularEstadisticas(List<VentaDTO> ventas){
         listaNoVacia(ventas);
 
-        double totalFacturado = ventas.stream().mapToDouble(Venta::getImporte).sum();
+        double totalFacturado = ventas.stream().mapToDouble(VentaDTO::getImporte).sum();
         int cantidadVentas = ventas.size();
         double ticketPromedio = totalFacturado/cantidadVentas;
-        Venta ventaMayor = ventas.stream().max(Comparator.comparingDouble(Venta::getImporte)).orElseThrow();
+        VentaDTO ventaMayor = ventas.stream().max(Comparator.comparingDouble(VentaDTO::getImporte)).orElseThrow();
 
-        Venta ventaMenor = ventas.stream().min(Comparator.comparingDouble(Venta::getImporte)).orElseThrow();
-        Map<String, Integer> cantidadPorProducto = ventas.stream().collect(Collectors.groupingBy(Venta::getProducto, Collectors.summingInt(Venta::getCantidad)));
+        VentaDTO ventaMenor = ventas.stream().min(Comparator.comparingDouble(VentaDTO::getImporte)).orElseThrow();
+        Map<String, Integer> cantidadPorProducto = ventas.stream().collect(Collectors.groupingBy(VentaDTO::getProducto, Collectors.summingInt(VentaDTO::getCantidad)));
 
         String productoMasVendido = cantidadPorProducto.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null);
     
@@ -37,7 +37,7 @@ public class VentaService {
         return estadisticas;
     }
 
-    public Map<String, Object> aplicarDescuento(List<Venta> ventas, double porcentaje){
+    public Map<String, Object> aplicarDescuento(List<VentaDTO> ventas, double porcentaje){
         listaNoVacia(ventas);
 
         if (porcentaje < 0 || porcentaje > 100) {
@@ -65,7 +65,7 @@ public class VentaService {
         return resultado;
     }
 
-    private void listaNoVacia(List<Venta> ventas) {
+    private void listaNoVacia(List<VentaDTO> ventas) {
         if (ventas == null || ventas.isEmpty()) {
             throw new DatosInvalidosException("La lista de ventas no puede estar vacia");
         }

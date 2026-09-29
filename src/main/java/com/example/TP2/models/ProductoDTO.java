@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "Representa un producto en el catálogo")
 
-public class Producto {
+public class ProductoDTO {
 
     @NotBlank 
     @Schema (description = "Identificador del producto", example = "100")

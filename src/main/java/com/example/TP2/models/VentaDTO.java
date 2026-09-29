@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Venta {
+public class VentaDTO {
 
     @NotBlank(message = "El producto no puede estar vacio")
     private String producto;

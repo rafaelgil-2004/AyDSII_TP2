@@ -3,7 +3,7 @@ package com.example.TP2.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.TP2.models.Producto;
+import com.example.TP2.models.ProductoDTO;
 import com.example.TP2.service.CatalogoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,7 +47,7 @@ public class CatalogoControler {
             @Parameter(description = "Precio minimo") @RequestParam(required = false) Double precioMin,
             @Parameter(description = "Precio maximo") @RequestParam(required = false) Double precioMax) {
 
-        List<Producto> productos = catalogoService.buscar(categoria, precioMin, precioMax);
+        List<ProductoDTO> productos = catalogoService.buscar(categoria, precioMin, precioMax);
         return respuestaOk("Busqueda realizada con exito", productos);
     }
 
@@ -57,14 +57,14 @@ public class CatalogoControler {
             @Parameter(description = "Criterio: precio o nombre", example = "precio") @RequestParam String criterio,
             @Parameter(description = "Orden: asc o desc", example = "desc") @RequestParam(required = false, defaultValue = "asc") String orden) {
 
-        List<Producto> productos = catalogoService.ordenar(criterio, orden);
+        List<ProductoDTO> productos = catalogoService.ordenar(criterio, orden);
         return respuestaOk("Productos ordenados con exito", productos);
     }
 
     @PostMapping
     @Operation(summary = "Agrega un nuevo producto al catalogo")
-    public ResponseEntity<Map<String, Object>> agregar(@Valid @RequestBody Producto producto) {
-        Producto creado = catalogoService.agregar(producto);
+    public ResponseEntity<Map<String, Object>> agregar(@Valid @RequestBody ProductoDTO producto) {
+        ProductoDTO creado = catalogoService.agregar(producto);
 
         Map<String, Object> respuesta = new LinkedHashMap<>();
         respuesta.put("status", HttpStatus.CREATED.value());
@@ -80,7 +80,7 @@ public class CatalogoControler {
             @Parameter(description = "Cantidad a sumar (negativa para restar)", example = "-5")
             @RequestParam int cantidad) {
 
-        Producto producto = catalogoService.modificarStock(id, cantidad);
+        ProductoDTO producto = catalogoService.modificarStock(id, cantidad);
         return respuestaOk("Stock actualizado con exito", producto);
     }
 

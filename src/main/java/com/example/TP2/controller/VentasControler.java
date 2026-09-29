@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.TP2.models.Venta;
+import com.example.TP2.models.VentaDTO;
 import com.example.TP2.service.VentaService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +32,7 @@ public class VentasControler {
 
     @PostMapping("/estadisticas")
     @Operation(summary = "Calcula estadisticas de un lote de ventas")
-    public ResponseEntity<Map<String, Object>> calcularEstadisticas(@Valid @RequestBody  List<Venta> ventas) {
+    public ResponseEntity<Map<String, Object>> calcularEstadisticas(@Valid @RequestBody  List<VentaDTO> ventas) {
         Map<String, Object> estadisticas = ventaService.calcularEstadisticas(ventas);
         Map<String, Object> respuesta = new LinkedHashMap<>();
 
@@ -44,7 +44,7 @@ public class VentasControler {
 
     @PostMapping("/aplicar-descuento")
     @Operation(summary = "Aplica un descuento a un lote de ventas")
-    public ResponseEntity<Map<String, Object>> aplicarDescuento(@Valid @RequestBody List<Venta> ventas,@Parameter(description = "Porcentaje de descuento a aplicar (entre 0 y 100)", example = "10")@RequestParam("porcentaje") double porcentaje) {
+    public ResponseEntity<Map<String, Object>> aplicarDescuento(@Valid @RequestBody List<VentaDTO> ventas,@Parameter(description = "Porcentaje de descuento a aplicar (entre 0 y 100)", example = "10")@RequestParam("porcentaje") double porcentaje) {
         Map<String, Object> resultado = ventaService.aplicarDescuento(ventas, porcentaje);
 
         Map<String, Object> respuesta = new LinkedHashMap<>();
